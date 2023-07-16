@@ -1,0 +1,54 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+body, h1, h2, h3, h4, h5, h6, p, .meheraj-team-card {
+    font-family: 'Montserrat', sans-serif !important;
+}
+.meheraj-team-card {
+    border-radius: .25rem;
+    overflow: hidden;
+    background: #F2F1F3;
+  }
+  .meheraj-team-card .meheraj-team-image {
+    width: 300;
+    height: 240px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+  }
+  .meheraj-team-image .attachment-large.size-large {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .meheraj-team-card .meheraj-team-content {
+    text-align: center;
+    padding: 8px 0px;
+  }
+  .meheraj-team-content {
+  }
+  .meheraj-team-card .meheraj-team-content h1 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  .meheraj-team-card .meheraj-team-content h4 {
+    font-size: 15px;
+    color: #737179;
+    margin: 0px;
+    font-weight: 400;
+  }
+  .meheraj-team-card .social-link {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+  }
+  .meheraj-team-card .social-link li a {
+    display: inline-block;
+    padding: 10px;
+    font-size: 16px;
+    color: #737179;
+  }
+  
