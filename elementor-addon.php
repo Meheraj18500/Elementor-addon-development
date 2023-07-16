@@ -26,9 +26,11 @@ if (class_exists('Elementor\Plugin')) {
 
         require_once( __DIR__ . '/widgets/test-widget.php' );
         require_once( __DIR__ . '/widgets/team_member.php' );
+        require_once( __DIR__ . '/widgets/testimonial-widget.php' );
     
         $widgets_manager->register( new \Meheraj_Elementor_Test_Widget() );
         $widgets_manager->register( new \Meheraj_Team_Member_Widget() );
+        $widgets_manager->register( new \Meheraj_Testimonial_Widget() );
     
     }
     add_action( 'elementor/widgets/register', 'meheraj_elementor_addon_register' );
