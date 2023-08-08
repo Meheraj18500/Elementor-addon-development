@@ -15,25 +15,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Loading CSS file
 add_action('wp_enqueue_scripts','meheraj_addon_enqueue_register');
 function meheraj_addon_enqueue_register(){
-  wp_enqueue_style( 'meheraj_addon', plugins_url( 'assets/style.css', __FILE__ ), false, "1.0.0");
+  wp_enqueue_style( 'meheraj_addon', plugins_url( 'assets/css/style.css', __FILE__ ), false, "1.0.0");
 }
 
 // Check if Elementor is active
 if (class_exists('Elementor\Plugin')) {
     
-    // Meheraj Addon Register
-    function meheraj_elementor_addon_register( $widgets_manager ) {
+    // Meheraj Widgets Register
+    function meheraj_addon_register( $widgets_manager ) {
 
-        require_once( __DIR__ . '/widgets/test-widget.php' );
-        require_once( __DIR__ . '/widgets/team_member.php' );
-        require_once( __DIR__ . '/widgets/testimonial-widget.php' );
-    
+        require_once( __DIR__ . '/inc/widgets/test-widget.php' );
+        require_once( __DIR__ . '/inc/widgets/team_member.php' );
+        require_once( __DIR__ . '/inc/widgets/testimonial-widget.php' );
+
         $widgets_manager->register( new \Meheraj_Elementor_Test_Widget() );
         $widgets_manager->register( new \Meheraj_Team_Member_Widget() );
         $widgets_manager->register( new \Meheraj_Testimonial_Widget() );
-    
+
     }
-    add_action( 'elementor/widgets/register', 'meheraj_elementor_addon_register' );
+    add_action( 'elementor/widgets/register', 'meheraj_addon_register' );
+
+    // Load Widgets Category File.
+    require_once plugin_dir_path(__FILE__) . 'inc/controls/widgets-category.php';
 
 } else {
     
@@ -47,3 +50,6 @@ if (class_exists('Elementor\Plugin')) {
     }
     add_action('admin_notices', 'meheraj_addon_admin_notice');
 }
+
+
+?>

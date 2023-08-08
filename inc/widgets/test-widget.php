@@ -14,7 +14,7 @@ class Meheraj_Elementor_Test_Widget extends \Elementor\Widget_Base {
 	}
 
 	public function get_categories() {
-		return [ 'basic' ];
+		return [ 'meheraj_widget' ];
 	}
 
 	public function get_keywords() {

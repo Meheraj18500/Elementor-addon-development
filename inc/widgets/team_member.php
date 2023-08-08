@@ -14,7 +14,7 @@ class Meheraj_Team_Member_Widget extends \Elementor\Widget_Base {
 	}
 
 	public function get_categories() {
-		return [ 'basic' ];
+		return [ 'meheraj_widget' ];
 	}
 
 	public function get_keywords() {
@@ -98,7 +98,6 @@ class Meheraj_Team_Member_Widget extends \Elementor\Widget_Base {
 					'url' => '',
 					'is_external' => true,
 					'nofollow' => true,
-					// 'custom_attributes' => '',
 				],
 				'label_block' => true,
 			]
@@ -115,85 +114,47 @@ class Meheraj_Team_Member_Widget extends \Elementor\Widget_Base {
 			]
 		);
 
+		$repeater = new \Elementor\Repeater();
+
+		$repeater->add_control(
+			'list_title',
+			[
+				'label' => esc_html__( 'Name', 'meheraj-addon' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => esc_html__( 'Social Name' , 'meheraj-addon' ),
+				'label_block' => true,
+			]
+		);
+
+		$repeater->add_control(
+			'list_icon',
+			[
+				'label' => esc_html__( 'Icon', 'meheraj-addon' ),
+				'type' => \Elementor\Controls_Manager::ICONS,
+				'label_block' => true,
+			]
+		);
+
+		$repeater->add_control(
+			'list_link',
+			[
+				'label' => esc_html__( 'Link', 'meheraj-addon' ),
+				'type' => \Elementor\Controls_Manager::URL,
+				'label_block' => true,
+			]
+		);
+
+
 		$this->add_control(
-			'meheraj_list',
+			'social_list',
 			[
 				'label' => esc_html__( 'Social Link', 'meheraj-addon' ),
 				'type' => \Elementor\Controls_Manager::REPEATER,
-				'fields' => [
-					[
-						'name' => 'list_title',
-						'label' => esc_html__( 'Title', 'meheraj-addon' ),
-						'type' => \Elementor\Controls_Manager::TEXT,
-						'default' => esc_html__( 'Enter Title' , 'meheraj-addon' ),
-						'label_block' => true,
-					],
-					[
-						'name' => 'social_icon',
-						'label' => esc_html__( 'Icon', 'meheraj-addon' ),
-						'type' => \Elementor\Controls_Manager::ICONS,
-						'label_block' => true,
-					],
-                    [
-						'name' => 'social_link',
-						'label' => esc_html__( 'Link', 'meheraj-addon' ),
-						'type' => \Elementor\Controls_Manager::URL,
-						'label_block' => true,
-					],
-                    [
-						'name' => 'icon_color',
-						'label' => esc_html__( 'Color', 'meheraj-addon' ),
-						'type' => \Elementor\Controls_Manager::COLOR,
-						'selectors' => [
-							'{{WRAPPER}} {{CURRENT_ITEM}}' => 'color: {{VALUE}}'
-						],
-					]
-				],
-				'default' => [
-					[
-						'list_title' => esc_html__( 'Facebook', 'meheraj-addon' ),
-						'social_icon' => 'fab fa-facebook-f',
-						'social_link' => 'https://www.facebook.com/',
-					],
-					[
-						'list_title' => esc_html__( 'Linked In', 'meheraj-addon' ),
-						'social_icon' => 'fab fa-linkedin-in',
-						'social_link' => 'https://www.linkedin.com/',
-					],
-					[
-						'list_title' => esc_html__( 'Instagram', 'meheraj-addon' ),
-						'social_icon' => 'fab fa-instagram',
-						'social_link' => 'https://www.instagram.com/',
-					],
-				],
+				'fields' => $repeater->get_controls(),
 				'title_field' => '{{{ list_title }}}',
 			]
 		);
 		$this->end_controls_section();
-        // Social link Tab End
-
-
-		// Style Tab Start
-		$this->start_controls_section(
-			'section_title_style',
-			[
-				'label' => esc_html__( 'Title Color', 'meheraj-addon' ),
-				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
-			]
-		);
-
-		$this->add_control(
-			'title_color',
-			[
-				'label' => esc_html__( 'Text Color', 'meheraj-addon' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .description_content' => 'color: {{VALUE}};',
-				],
-			]
-		);
-		$this->end_controls_section();
-		// Style Tab End
 
 	}
 
@@ -201,35 +162,41 @@ class Meheraj_Team_Member_Widget extends \Elementor\Widget_Base {
 		$settings = $this->get_settings_for_display();
 		?>
 
-		<!-- <pre> <?php //var_dump($settings); ?> </pre> -->
 
 		<div class="meheraj-team-card">
+			<!-- Image Print -->
 			<?php if(array_key_exists('member_image', $settings) && !empty($settings['member_image']['id'])) : ?>
 			<div class="meheraj-team-image">
 				<?php echo wp_get_attachment_image( $settings['member_image']['id'], 'large' ) ?>
 			</div>
 			<?php endif ?>
+
 			<div class="meheraj-team-content">
+				<!-- Title Print -->
 				<?php if(array_key_exists('name', $settings) && !empty($settings['name'])) : ?>
 				<h1><?php echo $settings['name']; ?></h1>
 				<?php endif ?>
+
+				<!-- Designation Print -->
 				<?php if(array_key_exists('designation', $settings) && !empty($settings['designation'])) : ?>
 				<h4><?php echo $settings['designation']; ?></h4>
 				<?php endif ?>
 
-				<?php if(array_key_exists('meheraj_list', $settings) && !empty($settings['meheraj_list'])) : ?>
+				<!-- Social Link Print -->
+				<?php if(array_key_exists('social_list', $settings) && !empty($settings['social_list'])) : ?>
 				<ul class="social-link">
-					<?php foreach($settings['meheraj_list'] as $social) : 
-						$is_external = $social['meheraj_list']['is_external'] == 'on' ? 'target="_blank"' : '';
-					?>
-					
-					<li><a href="<?php echo $social['social_link']['url']; ?>" target="<?php echo $is_external ?>"><i class="<?php echo $social['social_icon']['value']; ?>"></i></a></li>
+
+					<?php foreach($settings['social_list'] as $social) : ?>
+					<li>
+						<a href=" <?php echo $social['list_link']['url'];?> ">
+							<i class=" <?php echo $social['list_icon']['value'];?> "></i>
+						</a>
+					</li> 
 					<?php endforeach ?>
+
 				</ul>
 				<?php endif ?>
-			</div>
-			<div class="meheraj-team-overlay">
-
+				
 			</div>
 		</div>
 
