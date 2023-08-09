@@ -105,7 +105,7 @@ class Meheraj_Team_Member_Widget extends \Elementor\Widget_Base {
 		$this->end_controls_section();
 		// Content Tab End
 
-        // Socaial link Tab Start
+        // Social link Tab Start
         $this->start_controls_section(
 			'social_link_tab',
 			[
@@ -144,7 +144,7 @@ class Meheraj_Team_Member_Widget extends \Elementor\Widget_Base {
 			]
 		);
 
-
+		// Repeater Controls
 		$this->add_control(
 			'social_list',
 			[
@@ -155,7 +155,7 @@ class Meheraj_Team_Member_Widget extends \Elementor\Widget_Base {
 			]
 		);
 		$this->end_controls_section();
-
+		// Social link Tab End
 	}
 
 	protected function render() {
@@ -188,7 +188,7 @@ class Meheraj_Team_Member_Widget extends \Elementor\Widget_Base {
 
 					<?php foreach($settings['social_list'] as $social) : ?>
 					<li>
-						<a href=" <?php echo $social['list_link']['url'];?> ">
+						<a href=" <?php echo $social['list_link']['url'];?> " target="_blank">
 							<i class=" <?php echo $social['list_icon']['value'];?> "></i>
 						</a>
 					</li> 
