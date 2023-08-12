@@ -1,6 +1,9 @@
 /* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+/* ==============================
+      Team Member Addon Css
+================================= */
 body, h1, h2, h3, h4, h5, h6, p, .meheraj-team-card {
     font-family: 'Montserrat', sans-serif !important;
 }
@@ -52,3 +55,7 @@ body, h1, h2, h3, h4, h5, h6, p, .meheraj-team-card {
     color: #737179;
   }
   
+
+/* ==============================
+      Testimonial Addon Css
+================================= */

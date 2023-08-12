@@ -75,15 +75,6 @@ class Meheraj_Testimonial_Addon extends \Elementor\Widget_Base {
 			]
 		);
 
-		$meheraj_testimonial->add_control(
-			'list_link',
-			[
-				'label' => esc_html__( 'Link', 'meheraj-addon' ),
-				'type' => \Elementor\Controls_Manager::URL,
-				'label_block' => true,
-			]
-		);
-
 		// Repeater
 		$this->add_control(
 			'testimonial_list',
@@ -101,13 +92,24 @@ class Meheraj_Testimonial_Addon extends \Elementor\Widget_Base {
 
 	protected function render() {
 		$settings = $this->get_settings_for_display();
-		?>
-
-		<p class="hello-world">
-			<?php //echo $settings['title']; ?>
-		</p>
-
-		<?php
+		
+		
+		$html .= '<div class="testimonial-section">
+			<div class="testimonial-card">
+				<div class="testimonial-text">
+					<!-- Testimonial Text Here -->
+				</div>
+				<div class="testimonial-client-info">
+					<div class="client-img">
+						<!-- Client img -->
+					</div>
+					<div class="client-content">
+						<h3 class="client-name"></h3>
+						<span class="client-designation"></span>
+					</div>
+				</div>
+			</div>
+		</div>'
 	}
 
 

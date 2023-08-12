@@ -15,7 +15,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Loading CSS file
 add_action('wp_enqueue_scripts','meheraj_addon_enqueue_register');
 function meheraj_addon_enqueue_register(){
-  wp_enqueue_style( 'meheraj_addon', plugins_url( 'assets/css/style.css', __FILE__ ), false, "1.0.0");
+    // Enqueue CSS file
+    wp_enqueue_style( 'meheraj_addon', plugins_url( 'assets/css/style.css', __FILE__ ), false, "1.0.0");
+    wp_enqueue_style( 'meheraj_addon_slick_theme', plugins_url( 'assets/css/slick-theme.css', __FILE__ ), false, "1.0.0");
+    wp_enqueue_style( 'meheraj_addon_slick', plugins_url( 'assets/css/slick.css', __FILE__ ), false, "1.0.0");
+    
+    // Enqueue JS file
+    wp_enqueue_script('jquery');
+    wp_enqueue_script('meheraj_addon_slick_js', plugins_url('assets/js/slick.min.js', __FILE__), array(), '1.0.0', 'true');
 }
 
 // Check if Elementor is active
