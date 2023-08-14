@@ -75,6 +75,16 @@ class Meheraj_Testimonial_Addon extends \Elementor\Widget_Base {
 			]
 		);
 
+		// Carousel
+		$this->add_control(
+			'testimonial_carousel',
+			[
+				'label' => esc_html__( 'Carousel', 'meheraj-addon' ),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'default' => 'no',
+			]
+		);
+
 		// Repeater
 		$this->add_control(
 			'testimonial_list',
@@ -85,6 +95,7 @@ class Meheraj_Testimonial_Addon extends \Elementor\Widget_Base {
 				'title_field' => '{{{ client_name }}}',
 			]
 		);
+
 		$this->end_controls_section();
 		// Repeater Testimonial End
 		// Testimonial Tab End
@@ -93,25 +104,59 @@ class Meheraj_Testimonial_Addon extends \Elementor\Widget_Base {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 		
-		
-		$html .= '<div class="testimonial-section">
-			<div class="testimonial-card">
-				<div class="testimonial-text">
-					<!-- Testimonial Text Here -->
-				</div>
-				<div class="testimonial-client-info">
-					<div class="client-img">
-						<!-- Client img -->
+
+		if($settings['testimonial_carousel'] == 'yes'){
+			?> 
+			<script>
+				jQuery(document).ready(function(){
+					jQuery('.testimonial-section').slick({
+						slidesToShow: 3,
+						dots: true,
+						autoplay: true,
+  						autoplaySpeed: 1000,
+					});
+				});
+			</script>
+			<?php
+		}
+
+		?>
+
+		<div class="testimonial-section testimonial-section-<?php echo $settings['testimonial_carousel']; ?>">
+
+			<?php foreach($settings['testimonial_list'] as $testimonial) : ?>
+			<div class="content-wrapper">
+				<div class="testimonial-card">
+					<div class="testimonial-text">
+						<!-- Testimonial Text Here -->
+						<?php if(array_key_exists('testimonial_text', $testimonial) && !empty($testimonial['testimonial_text'])) : ?>
+						<p class="testimonial">"<?php echo $testimonial['testimonial_text']; ?>"</p>
+						<?php endif ?>
 					</div>
-					<div class="client-content">
-						<h3 class="client-name"></h3>
-						<span class="client-designation"></span>
+					<div class="testimonial-client-info">
+						<div class="client-img">
+							<!-- Client img -->
+							<?php if(array_key_exists('client_image', $testimonial) && !empty($testimonial['client_image'])) : ?>
+							<?php echo wp_get_attachment_image( $testimonial['client_image']['id'], 'large' ) ?>
+							<?php endif ?>
+						</div>
+						<div class="client-content">
+							<?php if(array_key_exists('client_name', $testimonial) && !empty($testimonial['client_name'])) : ?>
+							<h3 class="client-name"><?php echo $testimonial['client_name']; ?></h3>
+							<?php endif ?>
+
+							<?php if(array_key_exists('client_designation', $testimonial) && !empty($testimonial['client_designation'])) : ?>
+							<span class="client-designation"><?php echo $testimonial['client_designation']; ?></span>
+							<?php endif ?>
+							
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>'
+			<?php endforeach ?>
+
+		</div>
+		<?php
 	}
-
-
 }
 ?>
